@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Gitalk from '@gitalk/gitalk'
+import Gitalk from 'gitalk'
 import '@gitalk/gitalk/dist/gitalk.css'
 
 type Props = {

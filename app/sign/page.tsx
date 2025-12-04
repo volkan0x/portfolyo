@@ -132,7 +132,7 @@ class GitalkComponent extends Component<Props, State> {
       labels: ['Gitalk'],
       title: doc ? doc.title : '',
       body: '',
-      language: window.navigator.language || (window.navigator as any).userLanguage,
+      language: (nav?. language || (nav as any)?.userLanguage) || 'en',
       perPage: 10,
       pagerDirection: 'last',
       createIssueManually: false,
@@ -145,7 +145,7 @@ class GitalkComponent extends Component<Props, State> {
         leaveAnimation: 'accordionVertical'
       },
       enableHotKey: true,
-      url: window.location.href,
+      url: win?.location.href || '',
       defaultAuthor: {
         avatarUrl: '//avatars1.githubusercontent.com/u/29697133?s=50',
         login: 'null',
@@ -155,17 +155,19 @@ class GitalkComponent extends Component<Props, State> {
     }, props.options)
 
     this.state.pagerDirection = this.options.pagerDirection as 'last' | 'first'
-    const storedComment = window.localStorage.getItem(GT_COMMENT)
-    if (storedComment) {
-      this.state.comment = decodeURIComponent(storedComment)
-      window.localStorage.removeItem(GT_COMMENT)
+    if (win) {
+      const storedComment = win?.localStorage.getItem(GT_COMMENT)
+      if (storedComment) {
+        this.state.comment = decodeURIComponent(storedComment)
+        win?.localStorage.removeItem(GT_COMMENT)
+      }
     }
 
-    const query = queryParse()
-    if (query.code) {
+    const query = queryParse() as Record<string, string>
+    if (win && query.code) {
       const code = query.code
       delete query.code
-      const replacedUrl = `${window.location.origin}${window.location.pathname}?${queryStringify(query)}${window.location.hash}`
+      const replacedUrl = `${win.location.origin}${win.location.pathname}?${queryStringify(query)}${win.location.hash}`
       history.replaceState(null, '', replacedUrl)
       this.options = Object.assign({}, this.options, {
         url: replacedUrl,
@@ -208,7 +210,7 @@ class GitalkComponent extends Component<Props, State> {
           errorMsg: formatErrorMsg(err)
         })
       })
-    } else {
+    } else if (win) {
       this.getInit()
         .then(() => this.setState({ isIniting: false }))
         .catch(err => {
@@ -246,11 +248,13 @@ class GitalkComponent extends Component<Props, State> {
   get loginLink () {
     const githubOauthUrl = 'https://github.com/login/oauth/authorize'
     const { clientID } = this.options
+    if (typeof window === 'undefined') return '#'
+    const win = typeof window !== 'undefined' ? window : undefined
     const query = {
       client_id: clientID,
-      redirect_uri: window.location.href,
+      redirect_uri: win?.location.href,
       scope: 'public_repo'
-    }
+    } 
     return `${githubOauthUrl}?${queryStringify(query)}`
   }
 
@@ -258,11 +262,13 @@ class GitalkComponent extends Component<Props, State> {
     const { admin } = this.options
     const { user } = this.state
 
-    return !!(user && ~[].concat(admin || []).map((a: string) => a.toLowerCase()).indexOf((user.login || '').toLowerCase()))
+    return !!(user && ~([] as string[]).concat(admin || []).map((a: string) => a.toLowerCase()).indexOf((user.login || '').toLowerCase()))
   }
 
   getInit () {
-    return this.getUserInfo().then(() => this.getIssue()).then(issue => this.getComments(issue))
+    return this.getUserInfo().then(() => this.getIssue()).then(issue => { 
+      this.getComments(issue)
+    })
   }
 
   getUserInfo () {
@@ -487,7 +493,7 @@ class GitalkComponent extends Component<Props, State> {
       comments = comments.map(c => {
         if (c.id === comment.id) {
           if (c.reactions) {
-            if (!~c.reactions.nodes.findIndex((n: AnyObject) => n.user.login === user.login)) {
+            if (user && !~c.reactions.nodes.findIndex((n: AnyObject) => n.user.login === user.login)) {
               c.reactions.totalCount += 1
             }
           } else {
@@ -536,7 +542,7 @@ class GitalkComponent extends Component<Props, State> {
       if (res.data) {
         comments = comments.map(c => {
           if (c.id === comment.id) {
-            const index = c.reactions.nodes.findIndex((n: AnyObject) => n.user.login === user.login)
+            const index = user ? c.reactions.nodes.findIndex((n: AnyObject) => n.user.login === user.login) : -1
             if (~index) {
               c.reactions.totalCount -= 1
               c.reactions.nodes.splice(index, 1)
@@ -586,19 +592,17 @@ class GitalkComponent extends Component<Props, State> {
         isIssueCreating: false,
         isOccurError: false
       })
-      return this.getComments(issue)
+      this.getComments(issue)
     }).catch(err => {
       this.setState({
         isIssueCreating: false,
         isOccurError: true,
         errorMsg: formatErrorMsg(err)
       })
-    }).then(res => {
-      if (res) {
-        this.setState({
-          isNoInit: false
-        })
-      }
+    }).then(() => {
+      this.setState({
+        isNoInit: false
+      })
     })
   }
 
@@ -654,7 +658,7 @@ class GitalkComponent extends Component<Props, State> {
     const { issue, isLoadMore } = this.state
     if (isLoadMore) return
     this.setState({ isLoadMore: true })
-    this.getComments(issue).then(() => this.setState({ isLoadMore: false }))
+    this.getComments(issue || undefined).then(() => this.setState({ isLoadMore: false }))
   }
 
   handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({ comment: e.target.value })
@@ -700,11 +704,11 @@ class GitalkComponent extends Component<Props, State> {
             link: `<a href="https://github.com/${owner}/${repo}/issues">Issues</a>`
           })
         }}/>
-        <p>{this.i18n.t('please-contact', { user: [].concat(admin || []).map((u: string) => `@${u}`).join(' ') })}</p>
+        <p>{this.i18n.t('please-contact', { user: ([] as string[]).concat(admin || []).map((u: string) => `@${u}`).join(' ') })}</p>
         {this.isAdmin ? <p>
-          <Button onClick={this.handleIssueCreate} isLoading={isIssueCreating} text={this.i18n.t('init-issue')} />
+          <Button className="" getRef={undefined} onClick={this.handleIssueCreate} onMouseDown={undefined} isLoading={isIssueCreating} text={this.i18n.t('init-issue')} />
         </p> : null}
-        {!user && <Button className="gt-btn-login" onClick={this.handleLogin} text={this.i18n.t('login-with-github')} />}
+        {!user && <Button className="gt-btn-login" getRef={undefined} onClick={this.handleLogin} onMouseDown={undefined} text={this.i18n.t('login-with-github')} isLoading={false} />}
       </div>
     )
   }
@@ -716,7 +720,7 @@ class GitalkComponent extends Component<Props, State> {
         {user ?
           <Avatar className="gt-header-avatar" src={user.avatar_url} alt={user.login} /> :
           <a className="gt-avatar-github" onClick={this.handleLogin}>
-            <Svg className="gt-ico-github" name="github"/>
+            <Svg className="gt-ico-github" name="github" text=""/>
           </a>
         }
         <div className="gt-header-comment">
@@ -742,16 +746,20 @@ class GitalkComponent extends Component<Props, State> {
               getRef={this.getRef}
               className="gt-btn-public"
               onClick={this.handleCommentCreate}
+              onMouseDown={undefined}
               text={this.i18n.t('comment')}
               isLoading={isCreating}
             />}
 
             <Button
               className="gt-btn-preview"
+              getRef={undefined}
               onClick={this.handleCommentPreview}
+              onMouseDown={undefined}
               text={isPreview ? this.i18n.t('edit') : this.i18n.t('preview')}
+              isLoading={false}
             />
-            {!user && <Button className="gt-btn-login" onClick={this.handleLogin} text={this.i18n.t('login-with-github')} />}
+            {!user && <Button className="gt-btn-login" getRef={undefined} onClick={this.handleLogin} onMouseDown={undefined} text={this.i18n.t('login-with-github')} isLoading={false} />}
           </div>
         </div>
       </div>
@@ -783,7 +791,7 @@ class GitalkComponent extends Component<Props, State> {
         </FlipMove>
         {!totalComments.length && <p className="gt-comments-null">{this.i18n.t('first-comment-person')}</p>}
         {(!isLoadOver && totalComments.length) ? <div className="gt-comments-controls">
-          <Button className="gt-btn-loadmore" onClick={this.handleCommentLoad} isLoading={isLoadMore} text={this.i18n.t('load-more')} />
+          <Button className="gt-btn-loadmore" getRef={undefined} onClick={this.handleCommentLoad} onMouseDown={undefined} isLoading={isLoadMore} text={this.i18n.t('load-more')} />
         </div> : null}
       </div>
     )
@@ -833,11 +841,11 @@ class GitalkComponent extends Component<Props, State> {
           {user ?
             <div className={isPopupVisible ? 'gt-user-inner is--poping' : 'gt-user-inner'} onClick={this.handlePopup}>
               <span className="gt-user-name">{user.login}</span>
-              <Svg className="gt-ico-arrdown" name="arrow_down"/>
+              <Svg className="gt-ico-arrdown" name="arrow_down" text=""/>
             </div> :
             <div className={isPopupVisible ? 'gt-user-inner is--poping' : 'gt-user-inner'} onClick={this.handlePopup}>
               <span className="gt-user-name">{this.i18n.t('anonymous')}</span>
-              <Svg className="gt-ico-arrdown" name="arrow_down"/>
+              <Svg className="gt-ico-arrdown" name="arrow_down" text=""/>
             </div>
           }
         </div>
