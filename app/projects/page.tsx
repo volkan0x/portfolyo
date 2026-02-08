@@ -12,21 +12,32 @@ import { Experience } from "../components/experience";
 import Iframe from "../components/iframe";
 import { Timeline } from "../components/timeline";
 
-const redis = Redis.fromEnv();
+const hasRedisEnv =
+  !!process.env.UPSTASH_REDIS_REST_URL &&
+  !!process.env.UPSTASH_REDIS_REST_TOKEN;
+const redis = hasRedisEnv ? Redis.fromEnv() : null;
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
-  const views = (
-    await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-    )
-  ).reduce(
-    (acc, v, i) => {
-      acc[allProjects[i].slug] = v ?? 0;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+  const views = redis
+    ? (
+        await redis.mget<number[]>(
+          ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
+        )
+      ).reduce(
+        (acc, v, i) => {
+          acc[allProjects[i].slug] = v ?? 0;
+          return acc;
+        },
+        {} as Record<string, number>,
+      )
+    : allProjects.reduce(
+        (acc, project) => {
+          acc[project.slug] = 0;
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
 
   const featured = allProjects.find((project) => project.slug === "workflow")!;
   const top3 = allProjects.find((project) => project.slug === "havadurumu15")!;
