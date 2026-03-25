@@ -10,13 +10,13 @@ import { Card } from "../components/card";
 const socials = [
 	{
 		icon: <FaXTwitter size={20} />,
-		href: "https://twitter.com/volfcan",
+		href: "https://twitter.com/volkan0x™",
 		label: "twitter",
 		handle: "@volfcan",
 	},
 	{
 		icon: <Instagram size={20} />,
-		href: "https://instagram.com/volfcan",
+		href: "https://instagram.com/volkan0x",
 		label: "instagram",
 		handle: "@volfcan",
 	},
@@ -28,7 +28,7 @@ const socials = [
 	},
 	{
 		icon: <Github size={20} />,
-		href: "https://github.com/volfcan",
+		href: "https://github.com/volkan0x",
 		label: "github",
 		handle: "volfcan",
 	},
