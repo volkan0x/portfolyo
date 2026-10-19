@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     default: "volkan0x.pro",
     template: "%s | volkan0x.pro",
   },
-  description: "product designer",
+  description: "Product designer.",
   metadataBase: new URL("https://volkan0x.pro"),
   openGraph: {
     title: "volkan0x.pro",
-    description: "product designer",
+    description: "Product designer.",
     url: "https://volkan0x.pro",
     siteName: "volkan0x.pro",
     images: [

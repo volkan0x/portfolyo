@@ -2,7 +2,7 @@
   "init": "Gitalking ...",
   "no-found-related": "Related %{link} not found",
   "please-contact": "Please contact %{user} to initialize the comment",
-  "init-issue": "Init Issue",
+  "init-issue": "Init issue",
   "leave-a-comment": "Leave a comment",
   "preview": "Preview",
   "edit": "Edit",
@@ -13,8 +13,8 @@
   "commented": "commented",
   "load-more": "Load more",
   "counts": "%{counts} comment |||| %{counts} comments",
-  "sort-asc": "Sort by Oldest",
-  "sort-desc": "Sort by Latest",
+  "sort-asc": "Sort by oldest",
+  "sort-desc": "Sort by latest",
   "logout": "Logout",
   "anonymous": "Anonymous"
 }

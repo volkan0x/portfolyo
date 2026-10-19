@@ -1,6 +1,6 @@
 export const workExperience = [
   {
-    company: "Iati",
+    company: "Tourism Agency",
     role: "Product Marketing",
     startDate: "2021-01-01",
     endDate: "2021-06-01",
@@ -9,7 +9,7 @@ export const workExperience = [
     logo: "/logos/iati.jpeg",
   },
   {
-    company: "Feen",
+    company: "MobileApp",
     role: "Product Design",
     startDate: "2021-01-01",
     endDate: "2021-06-01",
@@ -24,7 +24,7 @@ export const workExperience = [
     logo: "/logos/feen.png",
   },
   {
-    company: "LaykaDAO",
+    company: "DAO",
     role: "Community Builder",
     startDate: "2022-01-01",
     endDate: "2023-06-01",
@@ -33,7 +33,7 @@ export const workExperience = [
     logo: "/logos/luna.jpeg",
   },
   {
-    company: "Growtechie",
+    company: "Web App",
     role: "Frontend Developer",
     startDate: "2024-04-04",
     endDate: "-",
@@ -42,7 +42,7 @@ export const workExperience = [
       "We are building it for the India and Turkiye",
       "We are using modern tools like Nextjs, React and Firebase",
     ],
-    location: "India, Turkiye",
+    location: "Global",
     logo: "/logos/growtechie.jpeg",
   },
 ];

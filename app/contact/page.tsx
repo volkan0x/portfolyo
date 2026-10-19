@@ -52,6 +52,16 @@ const socials = [
 	}
 ];
 
+const socialLabels: Record<string, string> = {
+	twitter: "Twitter",
+	instagram: "Instagram",
+	email: "Email",
+	github: "GitHub",
+	vimeo: "Vimeo",
+	youtube: "YouTube",
+	medium: "Medium",
+};
+
 export default function Example() {
 	return (
 		<div className=" bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
@@ -74,7 +84,7 @@ export default function Example() {
 								</span>{" "}
 								<div className="z-10 flex flex-col items-center">
 									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white font-display">
-										{s.label}
+										{socialLabels[s.label] ?? s.label}
 									</span>
 									<span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
 										{s.handle}

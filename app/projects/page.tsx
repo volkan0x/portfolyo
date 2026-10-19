@@ -43,9 +43,7 @@ export default async function ProjectsPage() {
         .catch(() => emptyViews)
     : emptyViews;
 
-  const featured = allProjects.find((project) => project.slug === "workflow")!;
   const top3 = allProjects.find((project) => project.slug === "aristo.today")!;
-  const top4 = allProjects.find((project) => project.slug === "volkan0x.pro")!;
   const top5 = allProjects.find((project) => project.slug === "flora-garden")!;
   const top6 = allProjects.find(
     (project) => project.slug === "image-classifier",
@@ -56,9 +54,9 @@ export default async function ProjectsPage() {
     .filter((p) => p.published)
     .filter(
       (project) =>
-        project.slug !== featured.slug &&
+        project.slug !== "workflow" &&
         project.slug !== top3.slug &&
-        project.slug !== top4.slug &&
+        project.slug !== "volkan0x.pro" &&
         project.slug !== top5.slug &&
         project.slug !== top6.slug &&
         project.slug !== top7.slug &&
@@ -76,64 +74,25 @@ export default async function ProjectsPage() {
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            projects
+            Projects
           </h2>
         </div>
         <div className="w-full h-px bg-zinc-800" />
-        <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
-          <Card>
-            <Link href={`/projects/${featured.slug}`}>
-              <article className="relative w-full h-full p-4 md:p-8">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="text-xs text-zinc-100">
-                    {featured.date ? (
-                      <time dateTime={new Date(featured.date).toISOString()}>
-                        {Intl.DateTimeFormat(undefined, {
-                          dateStyle: "medium",
-                        }).format(new Date(featured.date))}
-                      </time>
-                    ) : (
-                      <span>SOON</span>
-                    )}
-                  </div>
-                  <span className="flex items-center gap-1 text-xs text-zinc-500">
-                    <Eye className="w-4 h-4" />{" "}
-                    {Intl.NumberFormat("en-US", { notation: "compact" }).format(
-                      views[featured.slug] ?? 0,
-                    )}
-                  </span>
-                </div>
-                <h2
-                  id="featured-post"
-                  className="mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display"
-                >
-                  {featured.title}
-                </h2>
-                <p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
-                  {featured.description}
-                </p>
-                <div className="absolute bottom-4 md:bottom-8">
-                  {/* <p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
-                    Read more <span aria-hidden="true">&rarr;</span>
-                  </p> */}
-                </div>
-              </article>
-            </Link>
-          </Card>
+        <div className="mx-auto w-full">
           <Experience />
         </div>
         <div className="w-full h-px bg-zinc-800" />
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            products
+            Products
           </h2>
           <p className="mt-4 text-zinc-400">
-            products and tools i am building currently
+            Products and tools I am building currently.
           </p>
         </div>
         <div className="relative z-50 overflow-hidden grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0">
           <div className="grid gap-4">
-            {[top3, top4].map((project) => (
+            {[top3].map((project) => (
               <Card key={project.slug}>
                 <Article project={project} views={views[project.slug] ?? 0} />
                 <div className="px-8 gap-x-2 items-center flex stroke-1  text-gray-500">
@@ -145,7 +104,7 @@ export default async function ProjectsPage() {
                 <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
                   <BsTerminal className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
                   <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
-                    View Source
+                    View source
                   </p>
                 </div>
               </Card>
@@ -160,7 +119,7 @@ export default async function ProjectsPage() {
                 <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
                   <BsTerminal className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
                   <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
-                    View Source
+                    View source
                   </p>
                 </div>
               </Card>
@@ -187,10 +146,10 @@ export default async function ProjectsPage() {
         {/* <div className="w-full h-px bg-zinc-800" /> */}
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            ui & ux
+            UI & UX
           </h2>
           <p className="mt-4 text-zinc-400">
-            ui & ux design for digital products
+            UI & UX design for digital products.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
@@ -204,10 +163,10 @@ export default async function ProjectsPage() {
         <div className="w-full h-px bg-zinc-800" />
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            digital marketing & design
+            Digital marketing & design
           </h2>
           <p className="mt-4 text-zinc-400">
-            instagram, youtube, facebook and tiktok promotional videos
+            Instagram, YouTube, Facebook and TikTok promotional videos.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
@@ -242,7 +201,7 @@ export default async function ProjectsPage() {
       </div>
       <div className="py-16 gap-4">
           <h2 className="text-3xl py-8 text-zinc-100 font-bold tracking-tight sm:text-4xl">
-            figma design timeline
+            Figma design timeline
           </h2>
           <Timeline />
           {/* <div>
