@@ -48,6 +48,14 @@ export const Project = defineDocumentType(() => ({
 		video: {
 			type: "string",
 		},
+		videos: {
+			type: "list",
+			of: { type: "string" },
+		},
+		videoPosters: {
+			type: "list",
+			of: { type: "string" },
+		},
 	},
 	computedFields,
 }));

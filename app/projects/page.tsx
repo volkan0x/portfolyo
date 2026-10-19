@@ -19,25 +19,29 @@ const redis = hasRedisEnv ? Redis.fromEnv() : null;
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
+  const emptyViews = allProjects.reduce(
+    (acc, project) => {
+      acc[project.slug] = 0;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
   const views = redis
-    ? (
-        await redis.mget<number[]>(
+    ? await redis
+        .mget<number[]>(
           ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
         )
-      ).reduce(
-        (acc, v, i) => {
-          acc[allProjects[i].slug] = v ?? 0;
-          return acc;
-        },
-        {} as Record<string, number>,
-      )
-    : allProjects.reduce(
-        (acc, project) => {
-          acc[project.slug] = 0;
-          return acc;
-        },
-        {} as Record<string, number>,
-      );
+        .then((pageviews) =>
+          pageviews.reduce(
+            (acc, value, index) => {
+              acc[allProjects[index].slug] = value ?? 0;
+              return acc;
+            },
+            {} as Record<string, number>,
+          ),
+        )
+        .catch(() => emptyViews)
+    : emptyViews;
 
   const featured = allProjects.find((project) => project.slug === "workflow")!;
   const top3 = allProjects.find((project) => project.slug === "aristo.today")!;

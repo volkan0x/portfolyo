@@ -36,7 +36,10 @@ export default async function PostPage({ params }: Props) {
   }
 
   const views = redis
-    ? (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0
+    ? await redis
+        .get<number>(["pageviews", "projects", slug].join(":"))
+        .then((count) => count ?? 0)
+        .catch(() => 0)
     : 0;
 
   return (

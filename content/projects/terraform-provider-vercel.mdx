@@ -2,7 +2,7 @@
 title: Vercel Terraform Provider
 description: A Terraform provider for Vercel. It has been deprecated it when Vercel rolled out their official provider.
 date: "2021-03-16"
-repository: chronark/terraform-provider-vercel
+repository: volkan0x/terraform-provider-vercel
 url: https://registry.terraform.io/providers/chronark/vercel/latest
 published: false
 ---
@@ -31,7 +31,7 @@ resource "vercel_project" "my_project" {
   name = "project-via-terraform"
   git_repository {
     type = "github"
-    repo = "chronark/terraform-provider-vercel"
+    repo = "volkan0x/terraform-provider-vercel"
   }
 }
 ```
