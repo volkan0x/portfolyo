@@ -30,7 +30,7 @@ export const Timeline = () => {
             title="Figma Embed"
           ></iframe>
         </div>
-        <div>
+        {/* <div>
           <iframe
             style={{ border: "6px solid rgba(55, 55, 55, 1)" }}
             width="800"
@@ -39,7 +39,7 @@ export const Timeline = () => {
             allowFullScreen
             title="Figma Embed"
           ></iframe>
-        </div>
+        </div> */}
       </div>
     </div>
   );

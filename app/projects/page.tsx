@@ -40,8 +40,8 @@ export default async function ProjectsPage() {
       );
 
   const featured = allProjects.find((project) => project.slug === "workflow")!;
-  const top3 = allProjects.find((project) => project.slug === "havadurumu15")!;
-  const top4 = allProjects.find((project) => project.slug === "volfcan.com")!;
+  const top3 = allProjects.find((project) => project.slug === "aristo.today")!;
+  const top4 = allProjects.find((project) => project.slug === "volkan0x.pro")!;
   const top5 = allProjects.find((project) => project.slug === "flora-garden")!;
   const top6 = allProjects.find(
     (project) => project.slug === "image-classifier",
@@ -196,15 +196,7 @@ export default async function ProjectsPage() {
             </Card>
           ))}
         </div>
-        <div className="py-16 gap-4">
-          <h2 className="text-3xl py-8 text-zinc-100 font-bold tracking-tight sm:text-4xl">
-            figma design timeline
-          </h2>
-          <Timeline />
-          {/* <div>
-            <Iframe />
-          </div> */}
-        </div>
+        
         <div className="w-full h-px bg-zinc-800" />
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -244,6 +236,15 @@ export default async function ProjectsPage() {
           </div>
         </div>
       </div>
+      <div className="py-16 gap-4">
+          <h2 className="text-3xl py-8 text-zinc-100 font-bold tracking-tight sm:text-4xl">
+            figma design timeline
+          </h2>
+          <Timeline />
+          {/* <div>
+            <Iframe />
+          </div> */}
+        </div>
     </div>
   );
 }

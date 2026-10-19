@@ -1,4 +1,5 @@
 import type { Project } from "@/.contentlayer/generated";
+import Image from "next/image";
 import Link from "next/link";
 import { Eye, View } from "lucide-react";
 
@@ -9,8 +10,29 @@ type Props = {
 
 export const Article: React.FC<Props> = ({ project, views }) => {	
 	return (
-		<Link href={`/projects/${project.slug}`}>
-			<article className="p-4 md:p-8">
+		<article className="p-4 md:p-8">
+			{project.video ? (
+				<video
+					controls
+					playsInline
+					preload="metadata"
+					poster={project.image}
+					aria-label={`${project.title} video`}
+					className="mb-6 aspect-video w-full rounded-md bg-black object-cover"
+				>
+					<source src={project.video} type="video/webm" />
+					Your browser does not support embedded videos.
+				</video>
+			) : project.image ? (
+					<Image
+						src={project.image}
+						alt={`${project.title} preview`}
+						width={1280}
+						height={720}
+						className="mb-6 h-auto w-full rounded-md object-cover"
+					/>
+				) : null}
+			<Link href={`/projects/${project.slug}`}>
 				<div className="flex justify-between gap-2 items-center">
 					<span className="text-xs duration-1000 text-zinc-200 group-hover:text-white group-hover:border-zinc-200 drop-shadow-orange">
 						{project.date ? (
@@ -34,7 +56,7 @@ export const Article: React.FC<Props> = ({ project, views }) => {
 				<p className="z-20 mt-4 text-sm  duration-1000 text-zinc-400 group-hover:text-zinc-200">
 					{project.description}
 				</p>
-			</article>
-		</Link>
+			</Link>
+		</article>
 	);
 };
