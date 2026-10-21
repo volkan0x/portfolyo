@@ -1,6 +1,6 @@
 ---
 title: price scraper
-description: this is a python application that allows users to track the price of a product and receive email notifications when the price drops below a specified level. 
+description: this is a Python application that allows users to track the price of a product and receive e-mail notifications when the price drops below a specified level. 
 
 
 date: "2023-04-01"
@@ -9,8 +9,15 @@ published: true
   
 ---
 
-the application utilizes web scraping to extract product prices from a given url(works only for trendyol.com now) and sends email notifications using the gmail smtp server.
+the application utilizes web scraping to extract product prices from a given URL(works only for trendyol.com now) and sends e-mail notifications using the gmail SMTP server.
 
+## services included:
 
+- Web scraping: Retrieves product pages and extracts prices from Trendyol.
+- Price comparison: Checks whether a product’s price is at or below the user’s target price.
+- Email notifications: Sends an alert through Gmail SMTP when the target price is reached.
+- Web form: Lets users submit a product URL, target price, and email address.
+- Local data storage: Uses TinyDB to store tracking records.
+- Vercel configuration: Includes deployment settings for hosting the Python application on Vercel.
 
 

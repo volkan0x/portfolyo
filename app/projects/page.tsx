@@ -7,10 +7,12 @@ import { Article } from "./article";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
 import { stack } from "../constants/stack";
-import { BsTerminal } from "react-icons/bs";
+import { BsCameraVideo, BsCameraVideoFill, BsInstagram, BsTerminal } from "react-icons/bs";
 import { Experience } from "../components/experience";
 import Iframe from "../components/iframe";
 import { Timeline } from "../components/timeline";
+import { SiElevenlabs } from "react-icons/si";
+
 
 const hasRedisEnv =
   !!process.env.UPSTASH_REDIS_REST_URL &&
@@ -67,6 +69,10 @@ export default async function ProjectsPage() {
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
         new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
     );
+
+    const feedbird = allProjects.find(
+  (project) => project.slug === "feedbird",
+)!;
 
   return (
     <div className="relative pb-16">
@@ -126,7 +132,6 @@ export default async function ProjectsPage() {
             ))}
           </div>
         </div>
-
         <div className="w-full h-px bg-zinc-800" />
         {/* <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -152,14 +157,42 @@ export default async function ProjectsPage() {
             UI & UX design for digital products.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
-          {[top5, top8].map((project) => (
+        <div className=" grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
+          {[top5].map((project) => (
             <Card key={project.slug}>
               <Article project={project} views={views[project.slug] ?? 0} />
+              <div className="flex px-8 gap-x-2 items-center flex text-gray-500 stroke-1">
+                  {stack.figma.icon}
+              </div>
+              <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
+                  <BsTerminal className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                  <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                    View source
+                  </p>
+                </div>
             </Card>
           ))}
         </div>
-        
+        <div className=" grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
+          {[top8].map((project) => (
+            <Card key={project.slug}>
+              <Article project={project} views={views[project.slug] ?? 0} />
+              <div className="flex px-8 gap-x-2 items-center flex text-gray-500 stroke-1">
+                  {stack.nextjs.icon}
+                  {stack.react.icon}
+                  {stack.typescript.icon}
+                  {stack.tailwindcss.icon}
+                  {stack.javascript.icon}
+              </div>
+              <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
+                  <BsTerminal className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                  <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                    View source
+                  </p>
+              </div>
+            </Card>
+          ))}
+        </div>
         <div className="w-full h-px bg-zinc-800" />
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -176,6 +209,29 @@ export default async function ProjectsPage() {
               .map((project) => (
                 <Card key={project.slug}>
                   <Article project={project} views={views[project.slug] ?? 0} />
+                  {project.slug === "feedbird" && (
+                    <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                      <SiElevenlabs />
+                      {stack.adobeAftereffect.icon}
+                    </div>
+                  )}
+                  {project.slug === "the-kreatif" && (
+                    <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                      {/* {stack.linkedIn.icon} */}
+                      {stack.youtube.icon}
+                      {/* {stack.tiktok.icon} */}
+                      {stack.instagram.icon}
+                      {stack.twitter.icon}
+                      {/* {stack.facebook.icon} */}
+                    </div>
+                  )}
+                  
+                   <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
+                  <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                  <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                    View
+                  </p>
+              </div>
                 </Card>
               ))}
           </div>

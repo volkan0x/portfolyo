@@ -7,7 +7,7 @@ export const Timeline = () => {
   return (
     <div className="max-w-3xl mx-auto divide-zinc-600 ">
       <div>
-        <div>
+        {/* <div>
           <div className="absolute h-full w-[4px] bg-gradient-to-b from-transparent via-cyan-500 to:transparent  -left-4 md:-left-10">
             <Beam showBeam={true} className={`left-1`} />
           </div>
@@ -19,7 +19,7 @@ export const Timeline = () => {
             allowFullScreen
             title="Figma Embed"
           ></iframe>
-        </div>
+        </div> */}
         <div className="py-8">
           <iframe
             style={{ border: "6px solid rgba(55, 55, 55, 1)" }}
