@@ -15,8 +15,14 @@ import { SiElevenlabs } from "react-icons/si";
 import { SiGoogleads } from "react-icons/si";
 import { SiGoogleadsense } from "react-icons/si";
 import { TbBrandAdobePhotoshop } from "react-icons/tb";
-import { RiMetaLine } from "react-icons/ri";
+import { RiFirebaseFill, RiMetaLine, RiVercelLine } from "react-icons/ri";
 import { FaGoogle } from "react-icons/fa";
+import { DiNodejs } from "react-icons/di";
+import { SiReact } from "react-icons/si";
+
+
+
+
 
 const hasRedisEnv =
   !!process.env.UPSTASH_REDIS_REST_URL &&
@@ -49,7 +55,7 @@ export default async function ProjectsPage() {
         .catch(() => emptyViews)
     : emptyViews;
 
-  const top3 = allProjects.find((project) => project.slug === "aristo.today")!;
+  const top3 = allProjects.find((project) => project.slug === "aristo-today")!;
   const top5 = allProjects.find((project) => project.slug === "flora-garden")!;
   const top6 = allProjects.find(
     (project) => project.slug === "image-classifier",
@@ -205,6 +211,13 @@ export default async function ProjectsPage() {
                       {stack.adobeAftereffect.icon}
                     </div>
                   )}
+                  {project.slug === "growtechie" && (
+                      <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                        <RiFirebaseFill />
+                        <RiVercelLine />
+                        {stack.typescript.icon}
+                      </div>
+                    )}
                    <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
                   <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
                   <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
@@ -224,12 +237,20 @@ export default async function ProjectsPage() {
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                       <SiGoogleadsense />
                       {stack.adobeAftereffect.icon}
-                      <TbBrandAdobePhotoshop size={24} />
                       <RiMetaLine size={24} />
                     </div>
                   )}
+                   
+                    {project.slug === "gallerima" && (
+                      <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                        {stack.adobeAftereffect.icon}
+                        {stack.notion.icon}
+                      </div>
+                    )}
                 </Card>
               ))}
+
+           
           </div>
           <div className="grid grid-cols-1 gap-4">
             {sorted
@@ -244,12 +265,12 @@ export default async function ProjectsPage() {
                       <FaGoogle />
                     </div>
                   )} 
+                  
                     {project.slug === "the-kreatif" && (
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
-                      {stack.notion.icon}
+                      <SiReact size={22}/>
                       {stack.figma.icon}
                       {stack.adobeAftereffect.icon}
-                      <FaGoogle />
                     </div>
                   )}
                 </Card>

@@ -31,7 +31,7 @@
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",
     "moment": "^2.30.1",
-    "next": "^13.5.11",
+    "next": "^13.1.1",
     "next-contentlayer": "^0.3.4",
     "next-env": "^1.1.1",
     "raw-loader": "^4.0.2",
@@ -46,7 +46,6 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
     "tailwind-merge": "^2.4.0",
-    "typescript": "^5.2.2",
     "uuid": "^9.0.1",
     "vercel": "^32.6.1"
   },
@@ -56,8 +55,8 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/autosize": "^4.0.3",
     "@types/node": "^18.19.0",
-    "@types/react": "^18.2.28",
-    "@types/react-dom": "^18.2.13",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.16",
     "css-loader": "^7.1.2",
@@ -68,7 +67,8 @@
     "stylus": "^0.64.0",
     "stylus-loader": "^8.1.2",
     "tailwindcss": "^3.3.3",
-    "tailwindcss-debug-screens": "^2.2.1"
+    "tailwindcss-debug-screens": "^2.2.1",
+    "typescript": "^5.1.6"
   },
   "pnpm": {
     "overrides": {
