@@ -55,7 +55,6 @@ export default async function ProjectsPage() {
         .catch(() => emptyViews)
     : emptyViews;
 
-  const top3 = allProjects.find((project) => project.slug === "aristo-today")!;
   const top5 = allProjects.find((project) => project.slug === "flora-garden")!;
   const top6 = allProjects.find(
     (project) => project.slug === "image-classifier",
@@ -67,7 +66,6 @@ export default async function ProjectsPage() {
     .filter(
       (project) =>
         project.slug !== "workflow" &&
-        project.slug !== top3.slug &&
         project.slug !== "volkan0x.pro" &&
         project.slug !== top5.slug &&
         project.slug !== top6.slug &&
@@ -82,6 +80,9 @@ export default async function ProjectsPage() {
 
     const feedbird = allProjects.find(
   (project) => project.slug === "feedbird",
+)!;
+const aristo = allProjects.find(
+  (project) => project.slug === "aristo-today",
 )!;
 
   return (
@@ -211,19 +212,25 @@ export default async function ProjectsPage() {
                       {stack.adobeAftereffect.icon}
                     </div>
                   )}
-                  {project.slug === "growtechie" && (
+                  {project.slug === "land-property" && (
                       <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
-                        <RiFirebaseFill />
-                        <RiVercelLine />
+                        {stack.adobeAftereffect.icon}
+                      </div>
+                    )}
+                  {project.slug === "aristo-today" && (
+                      <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                        {stack.nextjs.icon}
+                        {stack.react.icon}
                         {stack.typescript.icon}
+                        {stack.tailwindcss.icon}
                       </div>
                     )}
                    <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
-                  <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
-                  <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
-                    View
-                  </p>
-              </div>
+                    <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                    <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                      View
+                    </p>
+                  </div>
                 </Card>
               ))}
           </div>
@@ -240,19 +247,29 @@ export default async function ProjectsPage() {
                       <RiMetaLine size={24} />
                     </div>
                   )}
-                   
+                    {project.slug === "growtechie" && (
+                      <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
+                        <RiFirebaseFill />
+                        <RiVercelLine />
+                        {stack.typescript.icon}
+                      </div>
+                    )}
                     {project.slug === "gallerima" && (
                       <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                         {stack.adobeAftereffect.icon}
                         {stack.notion.icon}
                       </div>
                     )}
+                    <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
+                    <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                    <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                      View
+                    </p>
+                  </div>
                 </Card>
-              ))}
-
-           
+              ))}           
           </div>
-          <div className="grid grid-cols-1 gap-4">
+          <div className=" grid-cols-1 space-y-4 ">
             {sorted
               .filter((_, i) => i % 3 === 2)
               .map((project) => (
@@ -265,7 +282,6 @@ export default async function ProjectsPage() {
                       <FaGoogle />
                     </div>
                   )} 
-                  
                     {project.slug === "the-kreatif" && (
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                       <SiReact size={22}/>
@@ -273,10 +289,20 @@ export default async function ProjectsPage() {
                       {stack.adobeAftereffect.icon}
                     </div>
                   )}
+                  <div className="m-8 flex flex-row space-x-2 mt-4 items-center px-0.5">
+                    <BsCameraVideo className="h-4 w-4 stroke-0.5 text-zinc-500 group-hover:text-cyan-500" />
+                    <p className="text-zinc-500 group-hover:text-cyan-500 text-xs">
+                      View
+                    </p>
+                  </div>
                 </Card>
+                
               ))}
+              
           </div>
+          
         </div>
+        
       </div>
       <div className="py-16 gap-4">
           <h2 className="text-3xl py-8 text-zinc-100 font-bold tracking-tight sm:text-4xl">
