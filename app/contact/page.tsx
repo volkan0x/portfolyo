@@ -8,12 +8,12 @@ import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 
 const socials = [
-	{
-		icon: <FaXTwitter size={20} />,
-		href: "https://twitter.com/volkan0x",
-		label: "Twitter",
-		handle: "@volkan0x",
-	},
+	// {
+	// 	icon: <FaXTwitter size={20} />,
+	// 	href: "https://twitter.com/volkan0x",
+	// 	label: "Twitter",
+	// 	handle: "@volkan0x",
+	// },
 	{
 		icon: <Instagram size={20} />,
 		href: "https://instagram.com/primeturk",
@@ -22,9 +22,9 @@ const socials = [
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:volcanbozkurt@gmail.com",
+		href: "mailto:primeturk0x@gmail.com",
 		label: "Email",
-		handle: "volcanbozkurt@gmail.com",
+		handle: "primeturk0x@gmail.com",
 	},
 	{
 		icon: <Github size={20} />,
@@ -32,12 +32,12 @@ const socials = [
 		label: "GitHub",
 		handle: "volkan0x",
 	},
-	{
-		icon: <FaVimeoV size={20} />,
-		href: "https://vimeo.com/user106211751",
-		label: "Vimeo",
-		handle: "volkan0x"
-	},
+	// {
+	// 	icon: <FaVimeoV size={20} />,
+	// 	href: "https://vimeo.com/user106211751",
+	// 	label: "Vimeo",
+	// 	handle: "volkan0x"
+	// },
 	// {
 	// 	icon: <Youtube size={20} />,
 	// 	href: "https://www.youtube.com/channel/UC9CJwetU8VCeQw4oeag_zMA",
