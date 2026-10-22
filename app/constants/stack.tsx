@@ -16,6 +16,9 @@ import {
   TbBrandYoutube,
   TbBrandFacebook,
   TbBrandAdobeAfterEffect,
+  TbBrandGmail,
+  TbBrandNotion,
+
   
 } from "react-icons/tb";
 
@@ -24,6 +27,16 @@ export const stack = {
     name: "Next.js",
     id: "nextjs",
     icon: <TbBrandNextjs className="h-6 w-6 stroke-1" />,
+  },
+  notion: {
+    name: "Notion",
+    id: "notion",
+    icon: <TbBrandNotion className="h-6 w-6 stroke-1" />,
+  },
+  gmail: {
+    name: "Gmail",
+    id: "gmail",
+    icon: <TbBrandGmail className="h-6 w-6 stroke-1" />,
   },
   adobeAftereffect: {
     name: "Adobe After Effects",

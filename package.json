@@ -12,7 +12,6 @@
     "fmt": "pnpm rome check . --apply-unsafe && pnpm rome format . --write"
   },
   "dependencies": {
-    "@next/font": "^13.5.4",
     "@next/mdx": "^13.5.4",
     "@notion-render/bookmark-plugin": "^0.0.2",
     "@notion-render/client": "^0.0.2",
@@ -32,7 +31,7 @@
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",
     "moment": "^2.30.1",
-    "next": "^13.5.4",
+    "next": "^13.5.11",
     "next-contentlayer": "^0.3.4",
     "next-env": "^1.1.1",
     "raw-loader": "^4.0.2",
