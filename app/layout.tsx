@@ -7,16 +7,23 @@ import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: {
-    default: "volkan0x.pro",
-    template: "%s | volkan0x.pro",
+    default: "Volkan Bozkurt | volkan0x.pro",
+    template: "%s | Volkan Bozkurt",
   },
-  description: "Product designer.",
+  description:
+    "Volkan Bozkurt - software engineer and product designer. Portfolio, projects and experience.",
+  applicationName: "Volkan Bozkurt",
+  authors: [{ name: "Volkan Bozkurt", url: "https://volkan0x.pro" }],
+  creator: "Volkan Bozkurt",
+  keywords: ["Volkan Bozkurt", "volkan0x", "volkan0x.pro", "portfolio", "software engineer"],
+  alternates: { canonical: "/" },
   metadataBase: new URL("https://volkan0x.pro"),
   openGraph: {
-    title: "volkan0x.pro",
-    description: "Product designer.",
+    title: "Volkan Bozkurt",
+    description:
+      "Volkan Bozkurt - software engineer and product designer. Portfolio, projects and experience.",
     url: "https://volkan0x.pro",
-    siteName: "volkan0x.pro",
+    siteName: "Volkan Bozkurt",
     images: [
       {
         url: "",
@@ -39,7 +46,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "volfcan",
+    title: "Volkan Bozkurt",
     card: "summary_large_image",
   },
   icons: {
@@ -62,7 +69,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <head></head>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Volkan Bozkurt",
+              alternateName: "volkan0x",
+              url: "https://volkan0x.pro",
+              jobTitle: "Software Engineer",
+            }),
+          }}
+        />
+      </head>
       <body
         className={`bg-black ${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
