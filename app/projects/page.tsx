@@ -19,10 +19,16 @@ import { RiFirebaseFill, RiMetaLine, RiVercelLine } from "react-icons/ri";
 import { FaGoogle } from "react-icons/fa";
 import { DiNodejs } from "react-icons/di";
 import { SiReact } from "react-icons/si";
+import { Metadata } from "next";
 
 
 
-
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "Explore software, product, and design projects by Volkan Bozkurt, a software engineer and product designer.",
+  alternates: { canonical: "/projects" },
+};
 
 const hasRedisEnv =
   !!process.env.UPSTASH_REDIS_REST_URL &&

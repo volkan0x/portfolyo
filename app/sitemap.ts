@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}${p}`,
     lastModified: new Date(),
   }));
-  const projects = allProjects.map((p) => ({
+  const projects = allProjects.filter((p) => p.published).map((p) => ({
     url: `${base}/projects/${p.slug}`,
     lastModified: new Date(),
   }));

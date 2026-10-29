@@ -7,28 +7,34 @@ import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: {
-    default: "Volkan Bozkurt | volkan0x.pro",
+    default: "Volkan Bozkurt | Software Engineer & Product Designer",
     template: "%s | Volkan Bozkurt",
   },
   description:
-    "Volkan Bozkurt - software engineer and product designer. Portfolio, projects and experience.",
+    "The official portfolio of Volkan Bozkurt, a software engineer and product designer. Explore projects, experience, and professional work.",
   applicationName: "Volkan Bozkurt",
   authors: [{ name: "Volkan Bozkurt", url: "https://volkan0x.pro" }],
   creator: "Volkan Bozkurt",
-  keywords: ["Volkan Bozkurt", "volkan0x", "volkan0x.pro", "portfolio", "software engineer"],
-  alternates: { canonical: "/" },
+  keywords: [
+    "Volkan Bozkurt",
+    "volkan0x",
+    "software engineer",
+    "product designer",
+    "portfolio",
+  ],
   metadataBase: new URL("https://volkan0x.pro"),
   openGraph: {
-    title: "Volkan Bozkurt",
+    title: "Volkan Bozkurt | Software Engineer & Product Designer",
     description:
-      "Volkan Bozkurt - software engineer and product designer. Portfolio, projects and experience.",
+      "The official portfolio of Volkan Bozkurt, a software engineer and product designer. Explore projects, experience, and professional work.",
     url: "https://volkan0x.pro",
     siteName: "Volkan Bozkurt",
     images: [
       {
-        url: "",
-        width: 1920,
-        height: 1080,
+        url: "/og.png",
+        width: 1362,
+        height: 482,
+        alt: "Volkan Bozkurt portfolio",
       },
     ],
     locale: "en-US",
@@ -46,7 +52,10 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Volkan Bozkurt",
+    title: "Volkan Bozkurt | Software Engineer & Product Designer",
+    description:
+      "The official portfolio of Volkan Bozkurt, a software engineer and product designer.",
+    images: ["/og.png"],
     card: "summary_large_image",
   },
   icons: {
@@ -75,11 +84,26 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Volkan Bozkurt",
-              alternateName: "volkan0x",
-              url: "https://volkan0x.pro",
-              jobTitle: "Software Engineer",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://volkan0x.pro/#person",
+                  name: "Volkan Bozkurt",
+                  alternateName: "volkan0x",
+                  url: "https://volkan0x.pro/",
+                  jobTitle: "Software Engineer and Product Designer",
+                  sameAs: ["https://github.com/volkan0x"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://volkan0x.pro/#website",
+                  name: "Volkan Bozkurt",
+                  url: "https://volkan0x.pro/",
+                  description:
+                    "The official portfolio of Volkan Bozkurt, a software engineer and product designer.",
+                  publisher: { "@id": "https://volkan0x.pro/#person" },
+                },
+              ],
             }),
           }}
         />

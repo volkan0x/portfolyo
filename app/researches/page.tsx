@@ -55,6 +55,15 @@
 //   )}
 
 // Temporary placeholder until Notion integration is set up
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Research",
+  description:
+    "Research and writing by Volkan Bozkurt on software engineering and product design.",
+  alternates: { canonical: "/researches" },
+};
+
 export default function Page() {
   return (
     <div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
@@ -64,4 +73,3 @@ export default function Page() {
     </div>
   )
 }
-

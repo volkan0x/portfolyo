@@ -5,6 +5,8 @@ import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
 import { Redis } from "@upstash/redis";
+import { Metadata } from "next";
+import { sentenceCase } from "@/util/sentenceCase";
 
 export const revalidate = 60;
 
@@ -13,6 +15,22 @@ type Props = {
     slug: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = allProjects.find(
+    (project) => project.slug === params.slug && project.published,
+  );
+
+  if (!project) {
+    return {};
+  }
+
+  return {
+    title: sentenceCase(project.title),
+    description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+  };
+}
 
 const hasRedisEnv =
   !!process.env.UPSTASH_REDIS_REST_URL &&
