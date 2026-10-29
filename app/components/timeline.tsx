@@ -22,7 +22,13 @@ export const Timeline = () => {
         </div> */}
         <div className="py-8">
           <iframe
-            style={{ border: "6px solid rgba(55, 55, 55, 1)" }}
+            className="block w-full max-w-full"
+            style={{
+              border: "6px solid rgba(55, 55, 55, 1)",
+              width: "100%",
+              height: "auto",
+              aspectRatio: "16 / 9",
+            }}
             width="800"
             height="450"
             src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2Fl1XXJcmWTxDBWcofrqZUeN%2Fflora-garden-hotel%3Fnode-id%3D0-394%26t%3DzTkFcST4RbDElvsg-1"
