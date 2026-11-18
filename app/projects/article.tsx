@@ -4,19 +4,20 @@ import { sentenceCase } from "@/util/sentenceCase";
 
 type Props = {
 	project: Project;
-	views: number;
 };
 
-export const Article: React.FC<Props> = ({ project, views }) => {	
+export const Article: React.FC<Props> = ({ project }) => {
 	return (
 		<article className="p-4 md:p-8">
 			<Link href={`/projects/${project.slug}`}>
+				{/*
 				<div className="flex justify-end gap-2 items-center">
 					<span className="text-zinc-500 text-xs">
 						{Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
 						{" Views"}
 					</span>
 				</div>
+				*/}
 				<h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-zinc-200 group-hover:text-white font-display">
 					{sentenceCase(project.title)}
 				</h2>

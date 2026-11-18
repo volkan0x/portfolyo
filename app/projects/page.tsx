@@ -4,8 +4,6 @@ import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
-import { Redis } from "@upstash/redis";
-import { Eye } from "lucide-react";
 import { stack } from "../constants/stack";
 import { BsCameraVideo, BsCameraVideoFill, BsInstagram, BsTerminal } from "react-icons/bs";
 import { Experience } from "../components/experience";
@@ -16,7 +14,6 @@ import { SiGoogleads } from "react-icons/si";
 import { SiGoogleadsense } from "react-icons/si";
 import { TbBrandAdobePhotoshop } from "react-icons/tb";
 import { RiFirebaseFill, RiMetaLine, RiVercelLine } from "react-icons/ri";
-import { FaGoogle } from "react-icons/fa";
 import { DiNodejs } from "react-icons/di";
 import { SiReact } from "react-icons/si";
 import { Metadata } from "next";
@@ -30,37 +27,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projects" },
 };
 
-const hasRedisEnv =
-  !!process.env.UPSTASH_REDIS_REST_URL &&
-  !!process.env.UPSTASH_REDIS_REST_TOKEN;
-const redis = hasRedisEnv ? Redis.fromEnv() : null;
-
 export const revalidate = 60;
 export default async function ProjectsPage() {
-  const emptyViews = allProjects.reduce(
-    (acc, project) => {
-      acc[project.slug] = 0;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
-  const views = redis
-    ? await redis
-        .mget<number[]>(
-          ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-        )
-        .then((pageviews) =>
-          pageviews.reduce(
-            (acc, value, index) => {
-              acc[allProjects[index].slug] = value ?? 0;
-              return acc;
-            },
-            {} as Record<string, number>,
-          ),
-        )
-        .catch(() => emptyViews)
-    : emptyViews;
-
   const top5 = allProjects.find((project) => project.slug === "flora-garden")!;
   const top6 = allProjects.find(
     (project) => project.slug === "image-classifier",
@@ -119,7 +87,7 @@ const aristo = allProjects.find(
           <div className="grid gap-4">
             {[top7, top6].map((project) => (
               <Card key={project.slug}>
-                <Article project={project} views={views[project.slug] ?? 0} />
+                <Article project={project} />
                 
                 <div className="flex px-8 gap-x-2 items-center flex text-gray-500 stroke-1">
                   {stack.python.icon}
@@ -146,7 +114,7 @@ const aristo = allProjects.find(
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
             {[top2].map((project) => (
               <Card key={project.slug}>
-                <Article project={project} views={views[project.slug] ?? 0} />
+                <Article project={project} />
               </Card>
             ))}
           </div> */}
@@ -163,7 +131,7 @@ const aristo = allProjects.find(
         <div className=" grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
           {[top5].map((project) => (
             <Card key={project.slug}>
-              <Article project={project} views={views[project.slug] ?? 0} />
+              <Article project={project} />
               <div className="flex px-8 gap-x-2 items-center flex text-gray-500 stroke-1">
                   {stack.figma.icon}
               </div>
@@ -179,7 +147,7 @@ const aristo = allProjects.find(
         <div className=" grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3 border-t border-gray-900/10 md:grid-cols-3 lg:border-t-0 ">
           {[top8].map((project) => (
             <Card key={project.slug}>
-              <Article project={project} views={views[project.slug] ?? 0} />
+              <Article project={project} />
               <div className="flex px-8 gap-x-2 items-center flex text-gray-500 stroke-1">
                   {stack.nextjs.icon}
                   {stack.react.icon}
@@ -211,7 +179,7 @@ const aristo = allProjects.find(
               .filter((_, i) => i % 3 === 0)
               .map((project) => (
                 <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
+                  <Article project={project} />
                   {project.slug === "feedbird" && (
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                       <SiElevenlabs />
@@ -245,7 +213,7 @@ const aristo = allProjects.find(
               .filter((_, i) => i % 3 === 1)
               .map((project) => (
                 <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
+                  <Article project={project} />
                    {project.slug === "feen" && (
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                       <SiGoogleadsense />
@@ -280,14 +248,7 @@ const aristo = allProjects.find(
               .filter((_, i) => i % 3 === 2)
               .map((project) => (
                 <Card key={project.slug}>
-                  <Article project={project} views={views[project.slug] ?? 0} />
-                  {project.slug === "iati" && (
-                    <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
-                      {stack.notion.icon}
-                      {stack.figma.icon}
-                      <FaGoogle />
-                    </div>
-                  )} 
+                  <Article project={project} />
                     {project.slug === "the-kreatif" && (
                     <div className="flex items-center gap-x-2 px-8 text-gray-500 stroke-1">
                       <SiReact size={22}/>
